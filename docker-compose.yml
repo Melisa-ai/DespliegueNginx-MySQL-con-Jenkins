@@ -1,0 +1,16 @@
+version: '3'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins-sever
+    ports:
+      - "8080:8080" # Puerto de Jenkins
+      - "50000:50000" # Puerto para agentes remotos
+    volumes:
+      - jenkins_home:/var/jenkins_home # Volumen persistente para datos de Jenkins
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins # Prefijo opcional si usas un subdirectorio
+    restart: always # El contenedor se reiniciará si se cae
+volumes:
+  jenkins_home:
+    #driver: local
